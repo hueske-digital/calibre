@@ -1,14 +1,13 @@
 services:
   app:
-    image: lscr.io/linuxserver/calibre-web:latest
+    image: lscr.io/linuxserver/kavita:latest
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Berlin
-      - DOCKER_MODS=linuxserver/mods:universal-calibre
     volumes:
       - app_data:/config
-      - /mnt/media/ebooks:/books:ro
+      - /mnt/media/ebooks:/data:ro
     networks:
       - proxy_apps
     restart: unless-stopped
