@@ -1,0 +1,22 @@
+services:
+  app:
+    image: lscr.io/linuxserver/calibre-web:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - DOCKER_MODS=linuxserver/mods:universal-calibre
+    volumes:
+      - app_data:/config
+      - /mnt/media/ebooks:/books:ro
+    networks:
+      - proxy_apps
+    restart: unless-stopped
+
+networks:
+  proxy_apps:
+    name: proxy_apps
+    external: true
+
+volumes:
+  app_data:
