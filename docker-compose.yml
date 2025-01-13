@@ -1,13 +1,15 @@
 services:
   app:
-    image: lscr.io/linuxserver/kavita:latest
+    image: crocodilestick/calibre-web-automated:latest
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Berlin
+      - DOCKER_MODS=lscr.io/linuxserver/mods:universal-calibre
     volumes:
-      - app_data:/config
-      - /mnt/media/ebooks:/data:ro
+      - app_config:/config
+      - $PWD/consume:/cwa-book-ingest
+      - app_data:/calibre-library
     networks:
       - proxy_apps
     restart: unless-stopped
@@ -18,4 +20,5 @@ networks:
     external: true
 
 volumes:
+  app_config:
   app_data:
